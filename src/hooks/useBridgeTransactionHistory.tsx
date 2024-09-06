@@ -103,7 +103,7 @@ const getSendRequests = async (url: string, sender: string) => {
 };
 
 const mergeAndSortTransactions = (transactions: BridgeTransaction[][]) => {
-  return transactions.flat().sort((a, b) => b.blockTimestamp - a.blockTimestamp);
+  return (transactions as any).flat().sort((a:any, b:any) => b.blockTimestamp - a.blockTimestamp);
 };
 
 export const useBridgeTransactionHistory = (sender: string) => {

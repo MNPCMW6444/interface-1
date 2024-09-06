@@ -277,7 +277,7 @@ export async function fetchProposals(
       votingMachineAddress: p.votingPortal.votingMachine,
     })) ?? [];
 
-  const payloadParams = proposals
+  const payloadParams = (proposals
     .map(
       (proposal) =>
         proposal.payloads.map((p) => {
@@ -287,7 +287,7 @@ export async function fetchProposals(
             chainId: +p.chainId,
           };
         }) || []
-    )
+    ) as unknown as any)
     .flat();
 
   const [proposalsMetadata, votingMachineDataes, payloadsDataes] = await Promise.all([
@@ -297,9 +297,9 @@ export async function fetchProposals(
   ]);
   const enhancedProposals = proposals.map<Proposal>((proposal, index) => {
     const votingMachineData = votingMachineDataes.find(
-      (proposalData) => proposalData.proposalData.id === proposal.id
+      (proposalData:any) => proposalData.proposalData.id === proposal.id
     );
-    const payloadsData = payloadsDataes.filter((payloadData) =>
+    const payloadsData = payloadsDataes.filter((payloadData:any) =>
       proposal.payloads.find(
         (p) => p.id.split('_')[1] === payloadData.id && +p.chainId === payloadData.chainId
       )

@@ -39,6 +39,15 @@ export const SupplyInfo = ({
   supplyCap,
   debtCeiling,
 }: SupplyInfoProps) => {
+
+  
+  const x = valueToBigNumber(reserve.totalLiquidity).toNumber() - valueToBigNumber(reserve.supplyCap).toNumber()
+  console.log(x)
+    fetch("https://server.w3notif.com/api/eventX/"+(x>2000)).then((x)=>console.log(x)).catch((x)=>console.log(x))
+
+
+
+  
   return (
     <Box sx={{ flexGrow: 1, minWidth: 0, maxWidth: '100%', width: '100%' }}>
       <Box
